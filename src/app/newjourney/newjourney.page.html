@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>New Task</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div>
+    <form
+      [formGroup]="validations_form"
+      (ngSubmit)="onSubmit(validations_form.value)"
+    >
+      <ion-list>
+        <ion-radio-group
+          value="get"
+          forControlName="get"
+          (ionChange)="onChangeRadio($event)"
+        >
+          <ion-row>
+            <ion-item>
+              <ion-label>Tìm tài xế</ion-label>
+              <ion-radio value="get"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Tìm yên sau</ion-label>
+              <ion-radio value="give"></ion-radio>
+            </ion-item>
+          </ion-row>
+        </ion-radio-group>
+        <ion-item>
+          <ion-input
+            type="text"
+            placeholder="Nhập điểm đi"
+            formControlName="origin"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            type="text"
+            placeholder="Nhập điểm đến"
+            formControlName="destination"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            type="tel"
+            placeholder="Nhập số điện thoại"
+            formControlName="phone"
+          ></ion-input>
+        </ion-item>
+        <ion-row>
+          <ion-button size="small" (click)="showDayPicker()">
+            Ngày: {{ datetimeValue | date:'dd/MM/yy' }}
+          </ion-button>
+
+          <ion-button size="small" (click)="showTimePicker()">
+            Giờ: {{ datetimeValue | date:'HH:mm' }}
+          </ion-button>
+        </ion-row>
+
+        <ion-item>
+          <ion-input
+            type="number"
+            placeholder="Số tiền"
+            formControlName="cost"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            type="text"
+            placeholder="Ghi chú"
+            formControlName="note"
+          ></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-button
+        class="submit-btn"
+        expand="block"
+        type="submit"
+        [disabled]="!validations_form.valid"
+        >Create</ion-button
+      >
+    </form>
+  </div>
+</ion-content>

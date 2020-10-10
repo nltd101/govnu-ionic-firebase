@@ -1,32 +1,54 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="end">
-      <ion-button [routerLink]="['/new-task']">
-        <ion-icon slot="icon-only" name="add"></ion-icon>
+      <ion-button (click)="logout()">
+        <ion-icon style="font-size: 40px" name="log-out"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Tasks List</ion-title>
+    <ion-title>GOVNU</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="items" class="list-mini-content" padding>
-  <div *ngIf="items.length > 0" class="list-mini">
-    <ion-list>
-      <ion-item *ngFor="let item of items" [routerLink]="['/details', item.payload.doc.id]">
-        <ion-thumbnail slot="start">
-          <img [src]="item.payload.doc.data().image">
-        </ion-thumbnail>
-        <ion-label>{{item.payload.doc.data().title}}</ion-label>
-        <ion-button fill="clear" slot="end">Details</ion-button>
+<ion-content *ngIf="items">
+  <ion-icon
+    class="float-button"
+    [routerLink]="['/newjourney']"
+    name="add-circle"
+    color="primary"
+  ></ion-icon>
+
+  <div *ngIf="items.length > 0">
+    <ion-list mode="ios">
+      <ion-item
+        *ngFor="let item of items"
+        [routerLink]="['/details', item.payload.doc.id]"
+      >
+        <div class="element">
+          <div class="leftcontainer">
+            <ion-text mode="ios">
+              <h3>{{item.payload.doc.data().origin}}</h3>
+            </ion-text>
+            <ion-text>
+              <p class="small-text">
+                {{ item.payload.doc.data().time | date:'HH:mm' }}
+              </p>
+              <p class="small-text">
+                {{ item.payload.doc.data().time | date:'dd/MM/yy' }}
+              </p>
+            </ion-text>
+          </div>
+          <img class="goimg" src="/assets/icongo.png" height="30px" />
+          <div class="rightcontainer">
+            <ion-text mode="ios"
+              ><h3>{{item.payload.doc.data().destination}}</h3></ion-text
+            >
+            <p class="small-text">{{ item.payload.doc.data().cost }} đ</p>
+            <p class="small-text">
+              {{ item.payload.doc.data().getter?'Tìm tài xế':'Tìm yên sau' }}
+            </p>
+          </div>
+        </div>
       </ion-item>
     </ion-list>
   </div>
-  <div *ngIf="items.length == 0" class="empty-list">
-    Please create your first task.
-  </div>
 </ion-content>
-<ion-footer (click)="logout()">
-  <ion-toolbar color="medium">
-    <ion-title>Log out</ion-title>
-  </ion-toolbar>
-</ion-footer>

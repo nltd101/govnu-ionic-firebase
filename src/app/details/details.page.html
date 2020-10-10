@@ -1,36 +1,85 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <!-- <ion-buttons slot="primary">
+      <ion-buttons slot="end">
+        <ion-back-button defaultHref="home"></ion-back-button>
+      </ion-buttons>
+    </ion-buttons> -->
+    <ion-title>Chi tiết</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="home"></ion-back-button>
+      </ion-buttons>
     </ion-buttons>
-    <ion-title>Details</ion-title>
+    <ion-buttons *ngIf="mine" slot="end" (click)="delete()">
+      <img width="40px" color="white" src="/assets/icon/trash-outline.svg" />
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
+<ion-content *ngIf="item" padding>
+  <div class="container">
+    <div>
+      <p>{{ item.payload.doc.data().getter?'Tìm tài xế':'Tìm yên sau' }}</p>
+    </div>
+    <div class="place-container">
+      <ion-text mode="ios">
+        <h3 class="place-text">{{item.payload.doc.data().origin}}</h3>
+      </ion-text>
 
-<ion-content padding>
-  <div>
-    <ion-row>
-      <ion-col size="6" offset="3">
-        <img [src]="image" alt="this is the image"/>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="6" offset="3">
-        <ion-button fill="outline" expand="block" size="small" (click)="openImagePicker()">Change Picture</ion-button>
-      </ion-col>
-    </ion-row>
+      <img src="/assets/icon/down.png" height="30px" />
+
+      <ion-text mode="ios"
+        ><h3 class="place-text">
+          {{item.payload.doc.data().destination}}
+        </h3></ion-text
+      >
+    </div>
+    <div class="money-container">
+      <img src="/assets/icon/price.png" />
+      <h4>{{ item.payload.doc.data().cost }} đ</h4>
+    </div>
+
+    <div class="time-container">
+      <div>
+        <img src="/assets/icon/clock.png" />
+        <p>{{ item.payload.doc.data().time | date:'HH:mm' }}</p>
+      </div>
+      <div>
+        <img src="/assets/icon/day.png" />
+        <p class="small-text">
+          {{ item.payload.doc.data().time | date:'dd/MM/yyyy' }}
+        </p>
+      </div>
+    </div>
+    <div class="phone-container">
+      <img src="/assets/icon/phonenumber.png" />
+      <h4>{{ item.payload.doc.data().phone }}</h4>
+    </div>
+    <div class="note-container">
+      <img src="/assets/icon/notepad.png" />
+      <h5>{{ item.payload.doc.data().note }}</h5>
+    </div>
   </div>
-  <form [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
-    <ion-item>
-      <ion-label position="floating" color="primary">Title</ion-label>
-      <ion-input type="text" formControlName="title"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating" color="primary">Description</ion-label>
-      <ion-input type="text" formControlName="description"></ion-input>
-    </ion-item>
-    <ion-button class="submit-button" expand="block" type="submit" [disabled]="!validations_form.valid">Save</ion-button>
-  </form>
-  <ion-button class="delete-button" expand="block" color="danger" (click)="delete()">Delete</ion-button>
-
 </ion-content>
+<footer>
+  <div class="contact-container">
+    <button class="phone">
+      <a href="tel:{{ item.payload.doc.data().phone }}">
+        <img src="/assets/icon/call.png" />
+      </a>
+    </button>
+
+    <button>
+      <a href="https://zalo.me/{{ item.payload.doc.data().phone }}">
+        <img src="/assets/icon/iconzalo.png" />
+      </a>
+    </button>
+    <button class="message">
+      <a
+        href="sms:{{ item.payload.doc.data().phone }}&body=Chào bạn mình từ GOVNU,"
+      >
+        <img src="/assets/icon/envelope.png" />
+      </a>
+    </button>
+  </div>
+</footer>

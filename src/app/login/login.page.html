@@ -1,15 +1,20 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Log In</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
+<div class="container">
+<div class="logo-container">
 
-<ion-content padding class="form-content">
+ 
+  <img width="auto" height="60" class ="img"src="/assets/ic_govnu_rmbg.png"/>
+   <p class="text">GOVNU</p>
+  </div>
+
   <form class="form" [formGroup]="validations_form" (ngSubmit)="tryLogin(validations_form.value)">
-    <ion-item>
-      <ion-label position="floating" color="primary">Email</ion-label>
-      <ion-input type="text" formControlName="email"></ion-input>
-    </ion-item>
+   
+      <ion-input class="input" type="text" formControlName="email"></ion-input>
+ 
     <div class="validation-errors">
       <ng-container *ngFor="let validation of validation_messages.email">
         <div class="error-message" *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
@@ -17,10 +22,9 @@
         </div>
       </ng-container>
     </div>
-    <ion-item>
-      <ion-label position="floating" color="primary">Password</ion-label>
-      <ion-input type="password" formControlName="password"></ion-input>
-    </ion-item>
+
+    <ion-input class="input" type="password" formControlName="password"></ion-input>
+    
     <div class="validation-errors">
       <ng-container *ngFor="let validation of validation_messages.password">
         <div class="error-message" *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
@@ -28,11 +32,12 @@
         </div>
       </ng-container>
     </div>
-    <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!validations_form.valid">Log In</ion-button>
+    <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!validations_form.valid">Đăng nhập</ion-button>
     <label class="error-message">{{errorMessage}}</label>
   </form>
   
   <p class="go-to-register">
-    No account yet? <a (click)="goRegisterPage()">Create an account.</a>
+    Chưa có tài khoản? <a class="create-account-text" (click)="goRegisterPage()">Tạo tài khoản</a>
   </p>
-</ion-content>
+
+</div>
