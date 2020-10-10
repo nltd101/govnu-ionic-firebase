@@ -19,7 +19,7 @@ run `ionic serve` to run the project locally.
 You will have to create your Firebase project and add the project configurations to the environment.ts file. [Read the tutorial to see how to do this](https://ionicthemes.com/tutorials/about/building-a-ionic-firebase-app-step-by-step).
 
 ### Demo
-[Test the live demo](https://ionic-4-firebase-crud-demo.firebaseapp.com)
+[![Fibonacci RMI Java EE](http://img.youtube.com/vi/nX_inqaAzOI/0.jpg)](https://www.youtube.com/watch?v=nX_inqaAzOI&feature=youtu.be&hd=1 "RMI Fibonacci Java")
 
 ### Screenshots
 These are some screenshots of the ionic example app we are going to build in this Ionic Firebase Tutorial:
